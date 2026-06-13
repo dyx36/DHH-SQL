@@ -1,0 +1,17 @@
+# 忽略所有二进制数据文件
+*.bin
+*.sqlite
+*.db
+*.sql
+
+data/spider/test_database/
+data/spider/database/*/schema.sql
+data/spider/database/*/*.sqlite
+data/*.bin
+
+
+isesl/
+__pycache__/
+*.pyc
+.cache/
+*.pt
