@@ -68,9 +68,9 @@ if __name__ == '__main__':
     arg_parser.add_argument('--semantic_batch_size', type=int, default = 8 ,required=False)
     arg_parser.add_argument('--semantic_threshold', type=float, default = 0.7 ,required=False)
     arg_parser.add_argument('--semantic_pretrain_model', type=str, default = 'google/electra-large-discriminator', required=False)
-    arg_parser.add_argument('--max_fk_path_len', type=int, default=3,
+    arg_parser.add_argument('--max_fk_path_len', type=int, required=True,
                             help='maximum number of FK hops for join-path hyperedges')
-    arg_parser.add_argument('--paths_per_table_pair', type=int, default=2,
+    arg_parser.add_argument('--paths_per_table_pair', type=int, required=True,
                             help='number of shortest join paths retained for each table pair')
     args = arg_parser.parse_args()
      

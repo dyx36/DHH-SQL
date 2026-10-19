@@ -122,7 +122,9 @@ class MultiHeadAttention(nn.Module):
 
 class PoolingFunction(nn.Module):
     """ Map a sequence of hidden_size dim vectors into one fixed size vector with dimension output_size """
-    def __init__(self, hidden_size=256, output_size=256, bias=True, method='attentive-pooling'):
+    def __init__(self, hidden_size=None, output_size=None, bias=True, method='attentive-pooling'):
+        if hidden_size is None or output_size is None:
+            raise ValueError("Numerical model settings are withheld; supply them explicitly.")
         super(PoolingFunction, self).__init__()
         assert method in ['mean-pooling', 'max-pooling', 'attentive-pooling']
         self.method = method

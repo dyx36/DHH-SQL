@@ -5,7 +5,7 @@ HYPERGRAPH_METADATA_VERSION = 1
 REQUIRED_DB_KEYS = ('composite_primary_keys', 'foreign_key_hyperedges', 'join_path_hyperedges')
 
 
-def build_hypergraph_metadata(max_fk_path_len=3, paths_per_table_pair=2):
+def build_hypergraph_metadata(max_fk_path_len, paths_per_table_pair):
     return {
         'version': HYPERGRAPH_METADATA_VERSION,
         'max_fk_path_len': int(max_fk_path_len),

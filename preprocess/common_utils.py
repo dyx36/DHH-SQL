@@ -91,8 +91,8 @@ class Preprocessor():
         if self.semantic_graph:
             self.semantic_graph_g = SemanticGraphGenerator(args)
             self.threshold = args.semantic_threshold
-        self.max_fk_path_len = max(1, int(getattr(args, 'max_fk_path_len', 3)))
-        self.paths_per_table_pair = max(1, int(getattr(args, 'paths_per_table_pair', 2)))
+        self.max_fk_path_len = max(1, int(args.max_fk_path_len))
+        self.paths_per_table_pair = max(1, int(args.paths_per_table_pair))
 
     def _build_join_path_hyperedges(self, t_num, foreign_key_hyperedges):
         adjacency = {i: [] for i in range(t_num)}

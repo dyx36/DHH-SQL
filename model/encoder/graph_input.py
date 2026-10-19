@@ -11,8 +11,10 @@ import copy
 
 class GraphInputLayer(nn.Module):
 
-    def __init__(self, embed_size, hidden_size, word_vocab, dropout=0.2, fix_grad_idx=60,
+    def __init__(self, embed_size, hidden_size, word_vocab, dropout=None, fix_grad_idx=60,
                  schema_aggregation='head+tail'):
+        if dropout is None:
+            raise ValueError("Numerical model settings are withheld; supply them explicitly.")
         super(GraphInputLayer, self).__init__()
         self.embed_size = embed_size
         self.hidden_size = hidden_size
@@ -55,8 +57,10 @@ class GraphInputLayer(nn.Module):
 
 class GraphInputLayerPLM(nn.Module):
 
-    def __init__(self, args, plm='bert-base-uncased', hidden_size=256, dropout=0., subword_aggregation='mean',
+    def __init__(self, args, plm='bert-base-uncased', hidden_size=None, dropout=None, subword_aggregation='mean',
                  schema_aggregation='head+tail', lazy_load=False):
+        if hidden_size is None or dropout is None:
+            raise ValueError("Numerical model settings are withheld; supply them explicitly.")
         super(GraphInputLayerPLM, self).__init__()
         self.plm_model = AutoModel.from_config(AutoConfig.from_pretrained(plm)) \
             if lazy_load else AutoModel.from_pretrained(plm)
@@ -79,14 +83,14 @@ class GraphInputLayerPLM(nn.Module):
         self.not_use_weight_transform = args.not_use_weight_transform
         self.random_question_edge = args.random_question_edge
         self.dynamic_rate = args.dynamic_rate
-        self.dynamic_topk = max(1, int(getattr(args, 'dynamic_topk', 2)))
+        self.dynamic_topk = max(1, int(args.dynamic_topk))
         self.use_static_link_fusion = bool(getattr(args, 'use_static_link_fusion', False))
         if self.optimize_graph:
             self.question_trans = nn.Linear(hidden_size, hidden_size)
             self.schema_trans = nn.Linear(hidden_size, hidden_size)
 
     @staticmethod
-    def _build_dynamic_link_weights(cos_sim_n, dynamic_topk=1):
+    def _build_dynamic_link_weights(cos_sim_n, dynamic_topk):
         dynamic_topk = max(1, min(int(dynamic_topk), cos_sim_n.size(1)))
         topk_scores, topk_idx = torch.topk(cos_sim_n, k=dynamic_topk, dim=1)
         weights = cos_sim_n.new_zeros(cos_sim_n.shape)

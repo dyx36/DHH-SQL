@@ -29,9 +29,9 @@ if __name__ == '__main__':
     arg_parser.add_argument('--dataset_path', type=str, required=True, help='dataset path')
     arg_parser.add_argument('--table_path', type=str, required=True, help='processed table path')
     arg_parser.add_argument('--output_path', type=str, required=True, help='output preprocessed dataset')
-    arg_parser.add_argument('--max_fk_path_len', type=int, default=3,
+    arg_parser.add_argument('--max_fk_path_len', type=int, required=True,
                             help='expected maximum FK hops used when tables.bin was generated')
-    arg_parser.add_argument('--paths_per_table_pair', type=int, default=2,
+    arg_parser.add_argument('--paths_per_table_pair', type=int, required=True,
                             help='expected number of shortest join paths retained per table pair')
     args = arg_parser.parse_args()
 

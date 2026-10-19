@@ -9,7 +9,9 @@ def cumsoftmax(x, dim=-1):
 
 class LinearDropConnect(nn.Linear):
     """ Used in recurrent connection dropout """
-    def __init__(self, in_features, out_features, bias=True, dropconnect=0.):
+    def __init__(self, in_features, out_features, bias=True, dropconnect=None):
+        if dropconnect is None:
+            raise ValueError("Numerical model settings are withheld; supply them explicitly.")
         super(LinearDropConnect, self).__init__(in_features=in_features, out_features=out_features, bias=bias)
         self.dropconnect = dropconnect
 
@@ -31,7 +33,9 @@ class LinearDropConnect(nn.Linear):
 
 class LockedDropout(nn.Module):
     """ Used in dropout between layers """
-    def __init__(self, hidden_size, num_layers=1, dropout=0.2):
+    def __init__(self, hidden_size, num_layers=None, dropout=None):
+        if num_layers is None or dropout is None:
+            raise ValueError("Numerical model settings are withheld; supply them explicitly.")
         super(LockedDropout, self).__init__()
         self.hidden_size = hidden_size
         self.num_layers = num_layers
@@ -103,7 +107,9 @@ class RecurrentNeuralNetwork(nn.Module):
 
 class LSTMCell(nn.Module):
 
-    def __init__(self, input_size, hidden_size, bias=True, dropconnect=0.):
+    def __init__(self, input_size, hidden_size, bias=True, dropconnect=None):
+        if dropconnect is None:
+            raise ValueError("Numerical model settings are withheld; supply them explicitly.")
         super(LSTMCell, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
@@ -138,7 +144,9 @@ class LSTMCell(nn.Module):
 
 class LSTM(RecurrentNeuralNetwork):
 
-    def __init__(self, input_size, hidden_size, num_layers=1, chunk_num=1, bias=True, dropout=0., dropconnect=0.):
+    def __init__(self, input_size, hidden_size, num_layers=None, chunk_num=None, bias=True, dropout=None, dropconnect=None):
+        if num_layers is None or chunk_num is None or dropout is None or dropconnect is None:
+            raise ValueError("Numerical model settings are withheld; supply them explicitly.")
         super(LSTM, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
@@ -151,7 +159,9 @@ class LSTM(RecurrentNeuralNetwork):
 
 class ONLSTMCell(nn.Module):
 
-    def __init__(self, input_size, hidden_size, chunk_num=8, bias=True, dropconnect=0.2):
+    def __init__(self, input_size, hidden_size, chunk_num=None, bias=True, dropconnect=None):
+        if chunk_num is None or dropconnect is None:
+            raise ValueError("Numerical model settings are withheld; supply them explicitly.")
         super(ONLSTMCell, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
@@ -203,7 +213,9 @@ class ONLSTMCell(nn.Module):
 
 class ONLSTM(RecurrentNeuralNetwork):
 
-    def __init__(self, input_size, hidden_size, num_layers=1, chunk_num=8, bias=True, dropout=0., dropconnect=0.):
+    def __init__(self, input_size, hidden_size, num_layers=None, chunk_num=None, bias=True, dropout=None, dropconnect=None):
+        if num_layers is None or chunk_num is None or dropout is None or dropconnect is None:
+            raise ValueError("Numerical model settings are withheld; supply them explicitly.")
         super(ONLSTM, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size

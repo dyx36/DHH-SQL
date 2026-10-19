@@ -15,3 +15,22 @@ __pycache__/
 *.pyc
 .cache/
 *.pt
+
+# Private experiment artifacts and configurations
+logdir/
+logs/
+exp/
+checkpoints/
+private/
+*.log
+*.ckpt
+*.pth
+*.safetensors
+params.json
+log_config.json
+command.sh
+*.private.json
+*.private.yaml
+*.private.yml
+.env
+.env.*

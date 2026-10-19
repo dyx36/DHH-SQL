@@ -24,7 +24,7 @@ def set_logger(exp_path, testing=False):
     logger.addHandler(consoleHandler)
     return logger
 
-def set_random_seed(random_seed=999):
+def set_random_seed(random_seed):
     random.seed(random_seed)
     torch.manual_seed(random_seed)
     if torch.cuda.is_available():
