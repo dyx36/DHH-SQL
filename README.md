@@ -1,39 +1,22 @@
 # DHH-SQL
 
-Research implementation of Dynamic Schema Linking via Heterogeneous Hypergraphs
-for Text-to-SQL.
+Dynamic Schema Linking via Heterogeneous Hypergraphs for Text-to-SQL.
 
 ## Public release scope
 
-This is a partial research release. The original training recipe, numerical
-hyperparameter defaults, and configuration-bearing regression fixtures are not
-distributed. This repository does not provide a complete recipe for reproducing
-the reported results.
+This repository provides a project overview and supporting SQL grammar and
+evaluation utilities. Core model implementation, hypergraph preprocessing,
+dynamic schema linking, training code, experiment configuration, and associated
+tests are withheld from the current public snapshot.
 
-The source retains heterogeneous schema hypergraphs, dynamic question-schema
-linking, and relation-aware graph encoding. Numerical experiment settings must
-be supplied explicitly by an authorized user; no replacement best settings are
-provided. See the CLI argument declarations for available options.
+This is a partial release and is not sufficient to train or reproduce DHH-SQL.
+The complete research implementation is maintained separately in private storage.
+Remaining dependencies and utilities may require their original external data
+and environment; they are not a standalone training package.
 
-## Data and environment
+## Publication history
 
-Install dependencies from `requirement.txt`. Obtain Spider and required language
-resources separately. Datasets, processed graphs, model weights, private launch
-scripts, logs, and experiment configurations are excluded from the public release.
-
-Preprocessing and training must use consistent hypergraph metadata. Checkpoint
-compatibility validation is retained.
-
-## Tests
-
-The remaining tests use small synthetic inputs to verify graph behavior. Their
-dimensions and tensor values are not experiment configurations. Tests containing
-withheld method settings are omitted from this public release.
-
-## Handling private artifacts
-
-Local execution still writes logs and checkpoints needed for research. Keep those
-artifacts private: they can contain settings, optimizer state, and model metadata.
-Ignore rules help prevent accidental tracking but do not remove committed history.
-Previously published revisions and third-party copies are not revoked by this
-cleanup.
+Earlier revisions of this repository included more implementation details.
+Removing files from the current snapshot does not revoke those revisions or
+third-party copies. Repository visibility and historical exposure require
+separate handling.
